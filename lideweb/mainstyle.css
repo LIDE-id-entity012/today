@@ -3,7 +3,7 @@
 --color-primary-light: #B03060; /* Lighter tint for backgrounds */
 --color-primary-dark: #4B0000; /* Darker shade for emphasis */
 --color-secondary: #FF6F61; /* Complementary accent */
---color-accent: #FFD700; /* CTA highlights */
+--color-accent: #FFD700; /* CTA highlights (Gold) */
 --color-neutral: #F9F9F9; /* Light background for cards/sections */
 --color-text: #333333; /* Main text color */
 }
@@ -13,6 +13,7 @@ html {
 line-height: 1.15; /* 1. Prevent adjustments of font size after orientation changes in iOS. */
 -webkit-text-size-adjust: 100%; /* 2. Prevent font size adjustment */
 box-sizing: border-box; /* 3. Use border-box model for all elements */
+height: 100%; /* Ensure HTML spans full height */
 }
 
 *, *::before, *::after {
@@ -23,6 +24,7 @@ body {
 margin: 0;
 background-color: var(--color-neutral);
 color: var(--color-text);
+min-height: 100vh; /* Ensure body uses full viewport height */
 }
 
 h1 {
@@ -254,6 +256,11 @@ margin-top: 0;
 margin-bottom: 1.5rem; /* Standard vertical rhythm unit */
 }
 
+/* MODIFICATION: Justify paragraph text */
+p {
+    text-align: justify;
+}
+
 /* List adjustments */
 ul, ol {
 padding-left: 2.5rem; /* Ensure lists have visible indentation */
@@ -269,6 +276,98 @@ color: #555;
 background-color: #f9f9f9;
 border-radius: 0.4rem;
 }
+
+/* A. Hero Sections (Unified Look: White BG, Maroon Headings) */
+.content-section.section--hero,
+.content-section.section--main-hero {
+    background-color: var(--color-neutral-light); /* Enforce White BG */
+    color: var(--color-text);
+    width: 100%;
+    
+    /* CORE CHANGE: Force section to fill the viewport height */
+    min-height: 100vh;
+    
+    /* CORE CHANGE: Use flexbox for vertical centering within the section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Remove default margin to ensure clean viewport transition */
+    margin-bottom: 0;
+	/* Ensure internal padding accounts for the container padding */
+    padding: 4rem 0; /* Reduced vertical padding for mobile, but keeps content centered */
+}
+
+/* Hero Section 1 (Build Predictable, Scalable UIs - Primary CTA) */
+.section--main-hero { padding: 8rem 0; text-align: center; }
+
+/* Hero Section 1 (Build Predictable, Scalable UIs) */
+.section--main-hero .section-heading {
+    color: var(--color-primary); 
+    font-size: 4.8rem;
+    margin-top: 0; /* Clear margins inside the vertically centered flex item */
+}
+
+.section--main-hero .section-subheading {
+    /* ... (styles remain the same) ... */
+    text-align: center; 
+}
+
+/* Hero Section 2 (Welcome to LIDE) */
+.content-section.section--hero .page-title {
+    color: var(--color-primary-dark);
+    font-size: 5.2rem;
+    margin-top: 0; /* Clear margins inside the vertically centered flex item */
+    text-align: center;
+}
+
+.content-section.section--hero .container {
+    /* Ensure content inside the container doesn't get squished */
+    max-width: 900px;
+	padding-left: var(--space-lg); /* 3rem */
+    padding-right: var(--space-lg); /* 3rem */
+}
+/* Paragraph text inherits global justify setting (2. Base Typography) */
+
+/* Mobile Specific Fixes for Hero Sections (Below 768px) */
+@media (max-width: 768px) {
+    .content-section.section--hero,
+    .content-section.section--main-hero {
+        /* Allow for slightly less centering space, making sure content fits */
+        min-height: 90vh; 
+        
+        /* Ensure the main container content is well-spaced on mobile */
+        padding-top: var(--space-lg);
+        padding-bottom: var(--space-lg);
+    }
+}
+
+/* NEW STYLE: Hero CTA Group Alignment */
+.hero-cta-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	/* MODIFIED: Increased gap for more space (e.g., from 2rem to 3rem) */
+    gap: 2rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* Mobile Fix: Force buttons to stack in a column on small screens */
+@media (max-width: 500px) {
+    .hero-cta-group {
+        flex-direction: column;
+        gap: 2rem; /* Smaller gap when stacked */
+    }
+    
+    /* Force buttons to take full width when stacked */
+    .hero-cta-group .btn {
+        width: 90%;
+        max-width: 350px; /* Limit max width for stacking visually */
+    }
+}
+
 
 /* ==========================================================================
  C. Layout Structure (Primary Responsive Containers)
@@ -320,7 +419,7 @@ transition: color 0.2s ease, opacity 0.2s ease;
 a:hover {
 text-decoration: underline; /* Add underline on hover */
 /* FIX: Use a maroon color for general link hover state */
-color: var(--color-primary-dark); 
+color: var(--color-primary-dark);
 }
 
 a:focus {
@@ -389,6 +488,7 @@ padding: 0.8rem 1rem;
 border: 0.1rem solid #ccc;
 border-radius: 0.4rem;
 background-color: #fff;
+color: #333;
 transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -396,6 +496,12 @@ input:focus, textarea:focus, select:focus {
 border-color: #0070f3;
 box-shadow: 0 0 0.2rem rgba(0, 112, 243, 0.4);
 outline: none;
+}
+
+label {
+display: block;
+font-weight: 600;
+margin-bottom: 0.8rem;
 }
 
 /* ==========================================================================
@@ -470,7 +576,7 @@ border-color: var(--color-primary);
 color: var(--color-neutral);
 }
 .btn--primary:hover {
-background-color: var(--color-primary-light);
+background-color: var(--color-primary-dark);
 }
 
 /* Secondary button */
@@ -580,7 +686,7 @@ transition: color 0.2s ease, border-color 0.2s ease;
 .nav__item a:hover,
 .nav__item a:focus {
 /* FIX: Navigation link hover/focus color is maroon */
-color: var(--color-primary-dark); 
+color: var(--color-primary-dark);
 border-bottom: 0.2rem solid var(--color-primary-dark);
 }
 
@@ -631,30 +737,29 @@ justify-content: center;
 .u-pb-2 { padding-bottom: 2rem; }
 
 /* ==========================================================================
- G. Responsive Adjustments
+ G. Responsive Utilities
  ========================================================================== */
 
+/* Flex utilities */
+.flex { display: flex; }
+.flex-center { display: flex; justify-content: center; align-items: center; }
+.flex-column { display: flex; flex-direction: column; }
+
+/* Grid utilities */
+.grid { display: grid; gap: 1.6rem; }
+.col-2 { grid-template-columns: repeat(2, 1fr); }
+.col-3 { grid-template-columns: repeat(3, 1fr); }
+.col-4 { grid-template-columns: repeat(4, 1fr); }
+
 @media (max-width: 768px) {
-.btn {
-width: 100%;
-text-align: center;
-}
-
-.nav {
-flex-direction: column;
-gap: 1rem;
-}
-
-.card {
-padding: 1.6rem;
-}
+.col-2, .col-3, .col-4 { grid-template-columns: 1fr; }
 }
 comp
 
 /* ==========================================================================
- H. Layout
+ H. Layout (Refined)
  ========================================================================== */
-   
+ 
 /* ===============================================
  Layout Foundation
  =============================================== */
@@ -677,6 +782,8 @@ flex-direction: column;
 align-items: center;
 justify-content: flex-start;
 padding: 2rem 1rem;
+padding-top: 0;
+padding-bottom: 0;
 width: 100%;
 max-width: 1200px;
 margin: 0 auto; /* center content horizontally */
@@ -689,16 +796,22 @@ margin-bottom: 3rem;
 }
 
 .content-section.section--featured {
-background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+background: var(--color-neutral-light);
 border-radius: 1rem;
-padding: 2rem;
-box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+padding: var(--space-md) var(--space-lg);
+box-shadow: 0 8px 20px rgba(0,0,0,0.01);
 transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Supplemental Adjustment: Reduce margin on the heading inside this specific section
+   to pull it closer to the box's edge, visually filling the top space. */
+.content-section.section--featured .section-heading {
+    margin-top: 0; 
 }
 
 .content-section.section--featured:hover {
 transform: translateY(-4px);
-box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
 /* Footer */
@@ -707,7 +820,7 @@ box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 background-color: var(--color-primary);
 color: var(--color-neutral);
 text-align: center;
-padding: 1.5rem;
+padding: 1.5rem 0; /* Adjusted padding for better fit with internal container */
 font-size: 0.9rem;
 letter-spacing: 0.02em;
 border-top: 1px solid rgba(255,255,255,0.1);
@@ -735,42 +848,105 @@ color: var(--color-text);
 }
 .layout-header.is-sticky {
 /* When sticky, use primary maroon color */
-background-color: var(--color-primary); 
+background-color: var(--color-primary);
 box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* FIX: Logo and Nav Link default colors are maroon */
+/* MODIFICATION: Make the header container a flex parent for logo and navigation, allowing wrap on mobile */
+.layout-header .container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* MODIFICATION: Increase logo text size */
 .site-logo {
 color: var(--color-primary);
+    font-size: 2.8rem; /* Larger, more prominent logo */
+    font-weight: 700; 
+    text-decoration: none;
 }
 
+/* -------------------------------------------------------------------------- */
+/* --- Navigation Links as Stylish Buttons --- */
+/* -------------------------------------------------------------------------- */
 .nav-link {
-color: var(--color-primary); 
-font-weight: 600;
-text-decoration: none;
-transition: color 0.2s ease;
+    display: block; 
+    padding: 0.8rem 1.6rem; 
+    font-weight: 600;
+    color: var(--color-primary); 
+    text-decoration: none;
+    transition: all 0.2s ease; 
+    border-radius: 0.6rem; 
+    border: 1px solid transparent; 
 }
 
-/* FIX: Ensure colors are light when sticky */
+/* Interactive Hover/Focus State */
+.nav-link:hover,
+.nav-link:focus {
+    text-decoration: none; 
+    background-color: var(--color-primary); 
+    color: var(--color-neutral); 
+    border-color: var(--color-primary); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transform: translateY(-1px); 
+}
+
+    /* Sticky default state */
 .layout-header.is-sticky .nav-link {
-color: var(--color-neutral);
+    color: var(--color-neutral);
+    /* MODIFICATION: Border is now maroon when the header is sticky */
+    border-color: var(--color-primary); 
+}
+
+/* Sticky Hover State */
+.layout-header.is-sticky .nav-link:hover {
+    background-color: var(--color-primary); 
+    /* MODIFICATION: Change text color from gold to white/neutral */
+    color: var(--color-neutral); 
+    border-color: var(--color-neutral);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transform: translateY(-1px);
 }
 
 .layout-header.is-sticky .site-logo {
 color: var(--color-neutral);
 }
 
-/* FIX: Hamburger menu bars are maroon by default */
+/* MODIFICATION: Fix Hamburger 'Pizza Platter' Appearance */
+.nav-toggle {
+    display: none;
+    width: 4rem; /* Specific size for the button area */
+    height: 4rem; 
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
+    gap: 0.4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101; /* Ensure it is clickable over the menu */
+}
+
 .nav-toggle span {
-width: 2.4rem;
-height: 0.3rem;
-background-color: var(--color-primary); 
-border-radius: 0.2rem;
+    width: 2.4rem;
+    height: 0.3rem;
+    background-color: var(--color-primary);
+    border-radius: 0.2rem;
+    transition: all 0.3s ease; 
 }
 /* Hamburger menu bars white when sticky */
 .layout-header.is-sticky .nav-toggle span {
 background-color: var(--color-neutral);
+}
+
+.nav-menu {
+    /* MODIFICATION: Push the entire nav-menu to the far right on desktop and prepare for mobile wrap */
+    margin-left: auto; 
+    width: auto; /* Default auto width on desktop */
 }
 
 .nav-menu ul {
@@ -781,35 +957,238 @@ margin: 0;
 padding: 0;
 }
 
-.nav-link:hover {
-/* FIX: Navigation link hover color is maroon */
-color: var(--color-primary-dark);
-}
-
-a.nav-link:hover {
-/* FIX: Overriding the old accent color with maroon dark */
-color: var(--color-primary-dark);
-}
-
 .nav-toggle {
 display: none;
-flex-direction: column;
-gap: 0.4rem;
-background: none;
-border: none;
-cursor: pointer;
 }
 
 
 @media (max-width: 768px) {
-.nav-menu ul {
-flex-direction: column;
-display: none;
+    /* MODIFICATION: Allows logo/toggle to stay in one row and the menu to wrap below */
+    .layout-header .container {
+        flex-wrap: wrap; 
+    }
+    
+    .nav-menu {
+        /* Reset for full width appearance on mobile when active */
+        margin-left: 0; 
+        width: 100%; /* Forces the menu onto its own line */
+        order: 10; /* Ensures the menu always appears after the logo and toggle button */
+    }
+    
+    .nav-menu ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 1rem 0; 
+        display: none; /* Menu is hidden by default on mobile */
+    }
+    
+    .nav-menu.active ul {
+        display: flex; /* Visible when active */
+    }
+    
+    .nav-toggle {
+        display: flex; /* Make it visible on mobile */
+        margin-left: auto;
+        order: 2; /* Ensures the toggle is on the far right */
+    }
+
+    /* Ensure button links are centered/full width on mobile */
+    .nav-link {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 0.5rem; /* Space between stacked buttons */
+    }
 }
-.nav-menu.active ul {
-display: flex;
+
+/* ==========================================================================
+ I. Newsletter Section
+ ========================================================================== */
+
+/* New: Narrow container for specific sections like the newsletter */
+.container--narrow {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
-.nav-toggle {
-display: flex;
+
+.section--newsletter {
+    background-color: var(--color-primary); /* Lighter maroon background */
+    color: var(--color-neutral); /* White text */
+    padding: 5rem 0;
+    text-align: center;
 }
+
+.section--newsletter .section-heading {
+    color: var(--color-neutral); /* Gold heading */
+    margin-bottom: 1rem;
+    font-size: 3.4rem;
+}
+
+.section--newsletter .section-subheading {
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+}
+
+.form-newsletter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Override base input styles for newsletter */
+.form-newsletter input[type="email"] {
+    flex-grow: 1;
+    max-width: 350px;
+    padding: 1.2rem 1.6rem;
+    border: 2px solid var(--color-neutral);
+    border-radius: 0.6rem;
+    font-size: 1.6rem;
+    box-shadow: none; /* Remove default shadow */
+}
+
+/* Override base button styles for newsletter */
+.form-newsletter .btn--primary {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.6rem;
+}
+
+/* MODIFICATION: White Border, Clear Background on Hover */
+.form-newsletter .btn--primary:hover,
+.form-newsletter .btn--primary:focus {
+    /* Override existing solid maroon background on hover */
+    background-color: transparent; 
+    /* Set text color to maroon (it was white before) */
+    color: var(--color-neutral); 
+    /* Set the border color to white */
+    border-color: var(--color-neutral); 
+}
+
+.form-newsletter small {
+    /* Ensure small text below the form is centered and visible */
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 550px) {
+    .form-newsletter {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .form-newsletter input[type="email"] {
+        max-width: 100%;
+    }
+}
+
+
+/* ==========================================================================
+ J. Footer
+ ========================================================================== */
+
+.container--footer {
+    padding: 0 1.6rem; 
+    margin: 0 auto;
+    max-width: 1200px; 
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: space-around; 
+    gap: 3rem; 
+    margin-bottom: 2rem; 
+    text-align: left;
+}
+
+.footer-col {
+    flex-basis: 25%; 
+    min-width: 150px; 
+}
+
+.footer-heading {
+    font-size: 1.8rem; 
+    font-weight: 700;
+    margin-bottom: 1.5rem; 
+    color: var(--color-neutral); 
+    line-height: 1.2;
+    margin-top: 0; 
+}
+
+/* Footer Navigation Links */
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-list li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-link {
+    color: var(--color-neutral); 
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: color 0.2s ease;
+    outline: none; 
+}
+
+.footer-link:hover,
+.footer-link:focus {
+    color: var(--color-neutral); 
+    text-decoration: underline;
+}
+
+/* Social Media Icons */
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.social-icon {
+    color: var(--color-neutral); 
+    font-size: 2.2rem; 
+    transition: color 0.2s ease, transform 0.2s ease;
+    text-decoration: none; 
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    color: var(--neutral); 
+    transform: scale(1.1); 
+}
+
+/* Footer Bottom (Copyright) */
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 0.1rem solid var(--color-neutral); 
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: var(--color-neutral); 
+}
+
+/* --- RESPONSIVENESS (Mobile View) --- */
+
+@media (max-width: 768px) {
+    .footer-columns {
+        flex-direction: column; 
+        gap: 3rem; 
+        text-align: center; 
+    }
+
+    .footer-col {
+        flex-basis: auto; 
+    }
+
+    .footer-links-list {
+        display: inline-block; 
+    }
+
+    .social-icons {
+        justify-content: center; 
+    }
 }
