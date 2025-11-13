@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===============================
-// 2. Base Utilities
+// 2. Base Utilities (REVISED)
 // ===============================
 
 LIDE.initFooterYear = function() {
@@ -48,13 +48,21 @@ LIDE.initFooterYear = function() {
 
 LIDE.initMenuToggle = function() {
   const toggle = document.getElementById("menu-toggle");
-  const header = document.getElementById("site-header");
-  if (!toggle || !header) return;
+  // MODIFICATION: Target the navigation element by its ID from the HTML
+  const navMenu = document.getElementById("main-nav");
+  
+  if (!toggle || !navMenu) return;
 
   toggle.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", !expanded);
-    header.classList.toggle("menu-open");
+    
+    // MODIFICATION: Toggle the required 'active' class on the navigation element (main-nav)
+    navMenu.classList.toggle("active");
+    
+    // Optional (but recommended for accessibility/scroll lock)
+    document.body.classList.toggle("menu-open"); 
+
     LIDE.log("Menu toggled");
   });
 };
