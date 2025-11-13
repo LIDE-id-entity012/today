@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIDE</title>
+    <link rel="stylesheet" href="mainstyle.css">
+    
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body class="site-body">
+    <div id="site-container" class="layout-wrapper">
+
+        <header id="site-header" class="layout-header">
+            <div class="container container--nav flex-group">
+                <a href="/" class="site-logo">LIDE</a>
+                <nav id="main-nav" class="nav-menu">
+                    <ul>
+                        <li><a href="/company.html" class="nav-link">Company</a></li>
+                        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+                        <li><a href="/products.html" class="nav-link">Products</a></li> 
+                        </ul>
+                </nav>
+                <button id="menu-toggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <main id="site-main" class="layout-main">
+            
+            <section class="content-section section--hero">
+                <div class="container">
+                    <h1 class="page-title">Welcome to LIDE</h1>
+                    <p>Brief introduction to LIDE. The LIDE Framework functions as a comprehensive, layered design system, strictly organized through normalization, a foundational layer, and a component layer, specifically engineered to maximize design consistency and element reusability. This foundation establishes precise proportional scaling for all typography and enforces predictable vertical spacing, known as vertical rhythm, between content blocks for optimal readability. All page content is housed within a main responsive container that dynamically adjusts its maximum width based on the screen size, while layout structures like grids automatically convert into single columns on smaller devices. The system provides specific reusable elements, such as primary, secondary, and outline buttons, each featuring distinct visual changes upon interaction, and clear, full-width form fields that highlight prominently when focused upon. Furthermore, interface panels, such as cards, are styled with soft edges and a shadow that gives the appearance of lifting slightly when hovered over, and the system promotes accessibility by providing clear visual focus indicators, typically blue outlines, around all interactive components.</p>
+                </div>
+            </section>
+            
+            <section class="content-section section--featured">
+                <div class="container container--grid">
+                    <h2 class="section-heading">Our Focus</h2>
+                    <p>Our focus within the LIDE Framework is the establishment of a highly consistent and reusable design system built upon a strict, layered architectural approach. This ensures maximum predictability across the user interface, beginning with the foundation that dictates precise proportional scaling for typography through a specific font scaling technique. We maintain visual clarity and rhythm by enforcing consistent vertical spacing between all structural elements. Layout flexibility is paramount, relying on a responsive container that adjusts dynamically to various screen sizes, while complex column grid layouts automatically collapse into a single column on mobile devices below the 768-pixel breakpoint. Finally, our efforts are centered on delivering detailed, reusable components, such as distinct primary, secondary, and outline buttons, alert messages for communicating different states (success, error, info), and interactive card elements that feature a subtle lifting effect on hover. This comprehensive component system is supported by a commitment to accessibility, providing clear visual focus indicators on all links and interactive form fields.</p>
+                    <div class="grid-item">
+                        </div>
+                    <div class="grid-item">
+                        </div>
+                    </div>
+            </section>
+
+        </main>
+
+        <footer id="site-footer" class="layout-footer">
+            <div class="container container--footer flex-group">
+                <p>&copy; <span id="current-year">2025</span> LIDE. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="/privacy.html" class="footer-link">Privacy</a>
+                    <a href="/terms.html" class="footer-link">Terms</a>
+                </div>
+            </div>
+        </footer>
+
+    </div> 
+
+    <script src="js/main.js" defer></script>
+    <script>
+        // Set the current year dynamically for the copyright notice
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
